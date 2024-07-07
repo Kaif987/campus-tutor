@@ -1,6 +1,7 @@
 import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
+import { getAllVideos } from "@/app/(user)/[id]/components/demodata";
 
 export async function POST(req) {
   try {
@@ -12,12 +13,26 @@ export async function POST(req) {
     );
 
     if (!isEnrolled) {
+      const response = await fetch(
+        "https://www.googleapis.com/drive/v3/files?q=" +
+        process.env.FILE_ID +
+        "+in+parents&key=" +
+        process.env.API_KEY,
+        { cache: "no-store" }
+      );
+
+      const data = await response.json();
+      const Course = data.files[id.substring(1)]
+      const videos = await getAllVideos(Course)
+      console.log({ videos })
+
       if (checkORadd === "check") {
         return NextResponse.json({ message: "Not Enrolled" }, { status: 200 });
       } else {
         const course = await user.courses.push({
           courseId: id,
           courseName: CourseName,
+          videos: videos,
           progress: 0,
         });
 

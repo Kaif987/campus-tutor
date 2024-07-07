@@ -59,17 +59,15 @@ function ChapterSIdeNav(Course) {
               {menuItem.title}
             </div>
             <div
-              className={`submenu ${
-                activeSubMenu === index ? "open" : ""
-              } pl-8`}
+              className={`submenu ${activeSubMenu === index ? "open" : ""
+                } pl-8`}
             >
               {menuItem.subMenuItems.map((subMenuItem, subIndex) => (
                 <div
                   key={subIndex}
                   onClick={() => handleClickSUBITEM(subMenuItem)}
-                  className={`cursor-pointer py-2 px-4 text-white hover:bg- border-[#21232b] ${
-                    subMenuItem === selectedItem ? "text-blue-500" : ""
-                  }`}
+                  className={`cursor-pointer py-2 px-4 text-white hover:bg- border-[#21232b] ${subMenuItem === selectedItem ? "text-blue-500" : ""
+                    }`}
                 >
                   <div className="flex flex-row">
                     <div className="mr-2">
